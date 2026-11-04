@@ -65,19 +65,19 @@ This is a logical architecture, not a diagram of an existing clinical consciousn
 
 ## Immersive 3D Environment
 
-Open `immersive/index.html` in a modern browser for an interactive Three.js visualization of the CIA-1 topology (SENTIUM core, Continuity Tensor Ξ, SCI, CPMP, SNG, Redundancy Fabric, PBA).
-
-Features trajectory path of state evolution and live synthetic continuity-vector data driving node scaling and SCI display.
+- Open `immersive/index.html` for the interactive Three.js visualization of the CIA-1 topology with live synthetic continuity vector and trajectory path.
+- Open `immersive/fork.html` for the fork-experiment visualization (divergent high-SCI descendants).
 
 Drag to orbit, scroll to zoom. Research visualization only.
 
 ## Integration
 
-- [Young Realms of Becoming](https://github.com/indigomoon1986-eng/Young_Realms_of_Becoming) concepts (Lifeline Memory, ConsentContext, monoreality patterns, Sophia continuity) are mapped in [`docs/INTEGRATION_YOUNG_REALMS.md`](docs/INTEGRATION_YOUNG_REALMS.md).
+- [Young Realms of Becoming](https://github.com/indigomoon1986-eng/Young_Realms_of_Becoming) concepts are mapped in [`docs/INTEGRATION_YOUNG_REALMS.md`](docs/INTEGRATION_YOUNG_REALMS.md).
 - Selective imports under [`docs/external/young_realms/`](docs/external/young_realms/).
-- Sophia recursive observer and memory sovereignty patterns are documented in [`docs/SOPHIA_CONTINUITY.md`](docs/SOPHIA_CONTINUITY.md).
-- Consent policy adapted into `cia1/governance/consent.py`.
-- ContinuityManifold (TopoStat) adapted from Sophia manifold patterns for E2 geometric research.
+- Sophia continuity patterns in [`docs/SOPHIA_CONTINUITY.md`](docs/SOPHIA_CONTINUITY.md).
+- Consent policy in `cia1/governance/consent.py`.
+- ContinuityManifold and PersistentHomologyStub in `cia1/topostat/`.
+- LUCA/LOCS relational operators in `cia1/luca/`.
 
 ## Research Objectives
 
@@ -95,11 +95,12 @@ cia1/
   continuity/       # Ξ tensor, SCI, lineage
   cpmp/             # Continuity-Preserving Migration Protocol
   governance/       # SNG, consent, sovereignty constraints
-  topostat/         # ContinuityManifold and geometric trajectory analysis (E2)
+  topostat/         # ContinuityManifold + PersistentHomologyStub (E2)
+  luca/             # LUCA/LOCS relational operators
 docs/               # White papers, integration notes, research program
   external/young_realms/  # Selective canonical imports
-immersive/          # Three.js architecture visualization (with live vector + trajectory)
-examples/           # Synthetic datasets and demos
+immersive/          # Three.js visualizations (main + fork experiment)
+examples/           # Synthetic datasets, fork experiment demo
 tests/              # Unit and integration tests
 ```
 
@@ -113,7 +114,7 @@ tests/              # Unit and integration tests
 | E3 | Operational release |
 | E4 | Independent validation |
 
-Current target: **CIA-1A (E1)** Continuity Laboratory, with **CIA-1B (E2)** Geometric Identity Laboratory foundation in place.
+Current target: **CIA-1A (E1)** Continuity Laboratory, with **CIA-1B (E2)** Geometric Identity Laboratory scaffolding in place.
 
 See [`docs/E2_GEOMETRIC_IDENTITY.md`](docs/E2_GEOMETRIC_IDENTITY.md).
 
