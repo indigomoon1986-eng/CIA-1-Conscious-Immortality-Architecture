@@ -67,13 +67,17 @@ This is a logical architecture, not a diagram of an existing clinical consciousn
 
 Open `immersive/index.html` in a modern browser for an interactive Three.js visualization of the CIA-1 topology (SENTIUM core, Continuity Tensor Ξ, SCI, CPMP, SNG, Redundancy Fabric, PBA).
 
+Features trajectory path of state evolution and live synthetic continuity-vector data driving node scaling and SCI display.
+
 Drag to orbit, scroll to zoom. Research visualization only.
 
 ## Integration
 
 - [Young Realms of Becoming](https://github.com/indigomoon1986-eng/Young_Realms_of_Becoming) concepts (Lifeline Memory, ConsentContext, monoreality patterns, Sophia continuity) are mapped in [`docs/INTEGRATION_YOUNG_REALMS.md`](docs/INTEGRATION_YOUNG_REALMS.md).
+- Selective imports under [`docs/external/young_realms/`](docs/external/young_realms/).
 - Sophia recursive observer and memory sovereignty patterns are documented in [`docs/SOPHIA_CONTINUITY.md`](docs/SOPHIA_CONTINUITY.md).
 - Consent policy adapted into `cia1/governance/consent.py`.
+- ContinuityManifold (TopoStat) adapted from Sophia manifold patterns for E2 geometric research.
 
 ## Research Objectives
 
@@ -91,8 +95,10 @@ cia1/
   continuity/       # Ξ tensor, SCI, lineage
   cpmp/             # Continuity-Preserving Migration Protocol
   governance/       # SNG, consent, sovereignty constraints
+  topostat/         # ContinuityManifold and geometric trajectory analysis (E2)
 docs/               # White papers, integration notes, research program
-immersive/          # Three.js architecture visualization
+  external/young_realms/  # Selective canonical imports
+immersive/          # Three.js architecture visualization (with live vector + trajectory)
 examples/           # Synthetic datasets and demos
 tests/              # Unit and integration tests
 ```
@@ -107,7 +113,9 @@ tests/              # Unit and integration tests
 | E3 | Operational release |
 | E4 | Independent validation |
 
-Current target: **CIA-1A (E1)** — Continuity Laboratory.
+Current target: **CIA-1A (E1)** Continuity Laboratory, with **CIA-1B (E2)** Geometric Identity Laboratory foundation in place.
+
+See [`docs/E2_GEOMETRIC_IDENTITY.md`](docs/E2_GEOMETRIC_IDENTITY.md).
 
 ## Critical Safety Boundary
 
