@@ -63,6 +63,18 @@ Sovereign Governance (SNG · XTAX · Christ Invariant · PBA)
 
 This is a logical architecture, not a diagram of an existing clinical consciousness-transfer system.
 
+## Immersive 3D Environment
+
+Open `immersive/index.html` in a modern browser for an interactive Three.js visualization of the CIA-1 topology (SENTIUM core, Continuity Tensor Ξ, SCI, CPMP, SNG, Redundancy Fabric, PBA).
+
+Drag to orbit, scroll to zoom. Research visualization only.
+
+## Integration
+
+- [Young Realms of Becoming](https://github.com/indigomoon1986-eng/Young_Realms_of_Becoming) concepts (Lifeline Memory, ConsentContext, monoreality patterns, Sophia continuity) are mapped in [`docs/INTEGRATION_YOUNG_REALMS.md`](docs/INTEGRATION_YOUNG_REALMS.md).
+- Sophia recursive observer and memory sovereignty patterns are documented in [`docs/SOPHIA_CONTINUITY.md`](docs/SOPHIA_CONTINUITY.md).
+- Consent policy adapted into `cia1/governance/consent.py`.
+
 ## Research Objectives
 
 1. **Computational continuity** — Technically investigable.
@@ -79,10 +91,10 @@ cia1/
   continuity/       # Ξ tensor, SCI, lineage
   cpmp/             # Continuity-Preserving Migration Protocol
   governance/       # SNG, consent, sovereignty constraints
-docs/               # White papers, mathematical reconstruction, research program
-specs/              # Formal schemas (JSON, YAML)
-tests/              # Unit and integration tests
+docs/               # White papers, integration notes, research program
+immersive/          # Three.js architecture visualization
 examples/           # Synthetic datasets and demos
+tests/              # Unit and integration tests
 ```
 
 ## Evidence Scale (Monarch Research)
