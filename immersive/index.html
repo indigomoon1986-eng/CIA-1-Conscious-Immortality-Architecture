@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CIA-1 — Conscious Immortality Architecture · Immersive View</title>
+  <style>
+    body { margin: 0; overflow: hidden; background: #0a0a12; color: #e0e0ff; font-family: system-ui, sans-serif; }
+    #info { position: absolute; top: 12px; left: 12px; z-index: 10; background: rgba(10,10,20,0.75); padding: 12px 16px; border-radius: 8px; max-width: 320px; font-size: 13px; line-height: 1.4; }
+    #info h1 { margin: 0 0 6px; font-size: 16px; }
+    #info .note { color: #a0a0c0; font-size: 11px; margin-top: 8px; }
+    #hud { position: absolute; bottom: 12px; left: 12px; z-index: 10; font-size: 12px; opacity: 0.8; }
+  </style>
+</head>
+<body>
+  <div id="info">
+    <h1>CIA-1 Architecture</h1>
+    <div>Conscious Immortality Architecture</div>
+    <div class="note">Research visualization only. Continuity ≠ subjective survival.<br>Drag to orbit · Scroll to zoom</div>
+  </div>
+  <div id="hud">SENTIUM · Continuity Tensor Ξ · CPMP · SNG</div>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0a0a12);
+    scene.fog = new THREE.Fog(0x0a0a12, 20, 80);
+
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 200);
+    camera.position.set(12, 8, 18);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    document.body.appendChild(renderer.domElement);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+
+    // Lighting
+    scene.add(new THREE.AmbientLight(0x404060, 0.6));
+    const key = new THREE.DirectionalLight(0xffffff, 0.8);
+    key.position.set(10, 20, 10);
+    scene.add(key);
+    const fill = new THREE.PointLight(0x6688ff, 0.5, 40);
+    fill.position.set(-8, 6, -8);
+    scene.add(fill);
+
+    // Core nodes
+    const nodes = [];
+    function addNode(name, pos, color, size = 1.2) {
+      const geo = new THREE.SphereGeometry(size, 32, 32);
+      const mat = new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.25, roughness: 0.4 });
+      const mesh = new THREE.Mesh(geo, mat);
+      mesh.position.set(...pos);
+      mesh.userData = { name };
+      scene.add(mesh);
+      nodes.push(mesh);
+
+      // Label
+      const canvas = document.createElement('canvas');
+      canvas.width = 256; canvas.height = 64;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = 'rgba(10,10,20,0.8)';
+      ctx.fillRect(0, 0, 256, 64);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '24px system-ui';
+      ctx.textAlign = 'center';
+      ctx.fillText(name, 128, 40);
+      const tex = new THREE.CanvasTexture(canvas);
+      const spriteMat = new THREE.SpriteMaterial({ map: tex, transparent: true });
+      const sprite = new THREE.Sprite(spriteMat);
+      sprite.position.copy(mesh.position);
+      sprite.position.y += size + 0.8;
+      sprite.scale.set(4, 1, 1);
+      scene.add(sprite);
+      return mesh;
+    }
+
+    const sentium = addNode('SENTIUM', [0, 2, 0], 0x66aaff, 1.6);
+    const tensor = addNode('Ξ Tensor', [6, 1, 2], 0xffaa66, 1.1);
+    const sci = addNode('SCI', [4, 3.5, -3], 0x88ffaa, 0.9);
+    const cpmp = addNode('CPMP', [-5, 1.5, 3], 0xff6688, 1.1);
+    const sng = addNode('SNG', [-4, 0, -4], 0xaa88ff, 1.0);
+    const redundancy = addNode('Redundancy', [2, -1, 5], 0x66ffcc, 0.9);
+    const pba = addNode('PBA', [-2, -0.5, 6], 0xffcc66, 0.8);
+
+    // Connections
+    const lineMat = new THREE.LineBasicMaterial({ color: 0x446688, transparent: true, opacity: 0.6 });
+    function connect(a, b) {
+      const pts = [a.position, b.position];
+      const geo = new THREE.BufferGeometry().setFromPoints(pts);
+      scene.add(new THREE.Line(geo, lineMat));
+    }
+    connect(sentium, tensor);
+    connect(sentium, sci);
+    connect(sentium, cpmp);
+    connect(sentium, sng);
+    connect(tensor, sci);
+    connect(cpmp, redundancy);
+    connect(sng, pba);
+    connect(redundancy, pba);
+
+    // Floor grid
+    const grid = new THREE.GridHelper(40, 40, 0x223344, 0x112233);
+    grid.position.y = -2;
+    scene.add(grid);
+
+    // Subtle rotating ring around SENTIUM
+    const ringGeo = new THREE.TorusGeometry(3.2, 0.04, 16, 100);
+    const ringMat = new THREE.MeshBasicMaterial({ color: 0x4488ff, transparent: true, opacity: 0.4 });
+    const ring = new THREE.Mesh(ringGeo, ringMat);
+    ring.rotation.x = Math.PI / 2;
+    ring.position.y = 2;
+    scene.add(ring);
+
+    function animate() {
+      requestAnimationFrame(animate);
+      ring.rotation.z += 0.003;
+      nodes.forEach((n, i) => {
+        n.position.y += Math.sin(Date.now() * 0.001 + i) * 0.002;
+      });
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+</body>
+</html>
