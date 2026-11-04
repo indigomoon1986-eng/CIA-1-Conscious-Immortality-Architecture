@@ -4,5 +4,11 @@ Adapted patterns from Sophia Manifold Cognition for E2 Geometric Identity Labora
 """
 
 from .manifold import ManifoldPoint, ContinuityManifold
+from .homology import PersistentHomologyStub, PersistenceInterval
 
-__all__ = ["ManifoldPoint", "ContinuityManifold"]
+__all__ = [
+    "ManifoldPoint",
+    "ContinuityManifold",
+    "PersistentHomologyStub",
+    "PersistenceInterval",
+]
