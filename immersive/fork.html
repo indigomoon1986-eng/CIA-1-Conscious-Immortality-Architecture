@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CIA-1 Fork Experiment</title>
+  <style>
+    body { margin: 0; background: #0a0a12; color: #e0e0ff; font-family: system-ui, sans-serif; }
+    #info { position: absolute; top: 12px; left: 12px; z-index: 10; background: rgba(10,10,20,0.8); padding: 12px; border-radius: 8px; max-width: 380px; font-size: 13px; }
+    #info h1 { margin: 0 0 6px; font-size: 16px; }
+  </style>
+</head>
+<body>
+  <div id="info">
+    <h1>Fork Experiment</h1>
+    <div>One source produces two high-SCI descendants that subsequently diverge.</div>
+    <div style="margin-top:8px; color:#a0a0c0; font-size:12px;">SCI cannot uniquely resolve numerical personal identity.<br>Research control only.</div>
+  </div>
+  <script type="importmap">
+    { "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }
+  </script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0a0a12);
+    const camera = new THREE.PerspectiveCamera(60, innerWidth/innerHeight, 0.1, 100);
+    camera.position.set(8, 6, 10);
+    const renderer = new THREE.WebGLRenderer({antialias:true});
+    renderer.setSize(innerWidth, innerHeight);
+    document.body.appendChild(renderer.domElement);
+    const controls = new OrbitControls(camera, renderer.domElement);
+
+    scene.add(new THREE.AmbientLight(0x404060));
+    const light = new THREE.DirectionalLight(0xffffff, 0.8);
+    light.position.set(5,10,5);
+    scene.add(light);
+
+    function node(pos, color, label) {
+      const m = new THREE.Mesh(new THREE.SphereGeometry(0.6, 24, 24),
+        new THREE.MeshStandardMaterial({color, emissive:color, emissiveIntensity:0.3}));
+      m.position.set(...pos);
+      scene.add(m);
+      const c = document.createElement('canvas'); c.width=128; c.height=32;
+      const ctx = c.getContext('2d');
+      ctx.fillStyle='#fff'; ctx.font='20px system-ui'; ctx.textAlign='center';
+      ctx.fillText(label, 64, 22);
+      const sp = new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(c), transparent:true}));
+      sp.position.copy(m.position); sp.position.y += 1.1; sp.scale.set(2,0.5,1);
+      scene.add(sp);
+      return m;
+    }
+
+    const source = node([0,1,0], 0x66aaff, 'Source');
+    const a = node([4,2,2], 0xffaa66, 'Fork A');
+    const b = node([4,0,-2], 0x88ffaa, 'Fork B');
+
+    function line(p1, p2, color=0x446688) {
+      const g = new THREE.BufferGeometry().setFromPoints([p1.position, p2.position]);
+      scene.add(new THREE.Line(g, new THREE.LineBasicMaterial({color, transparent:true, opacity:0.7})));
+    }
+    line(source, a);
+    line(source, b);
+    line(a, b, 0x666666);
+
+    scene.add(new THREE.GridHelper(20,20,0x223344,0x112233));
+
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    animate();
+    addEventListener('resize', () => {
+      camera.aspect = innerWidth/innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(innerWidth, innerHeight);
+    });
+  </script>
+</body>
+</html>
