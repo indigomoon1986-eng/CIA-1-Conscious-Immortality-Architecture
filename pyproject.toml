@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cia1"
+version = "0.1.0-e1"
+description = "CIA-1 — Conscious Immortality Architecture. Experimental computational identity continuity research."
+authors = [{name = "Steven Craig Leake Jr."}]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.24.0",
+    "scipy>=1.10.0",
+    "pydantic>=2.0.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0.0"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["cia1*"]
