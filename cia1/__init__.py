@@ -15,10 +15,12 @@ from .sentium.core import SENTIUMState
 from .continuity.tensor import ContinuityTensor
 from .continuity.sci import SubjectiveContinuityIndex
 from .entrainment.brainprint import BrainprintSession
+from .entrainment.resonance import ResonanceLock
 
 __all__ = [
     "SENTIUMState",
     "ContinuityTensor",
     "SubjectiveContinuityIndex",
     "BrainprintSession",
+    "ResonanceLock",
 ]

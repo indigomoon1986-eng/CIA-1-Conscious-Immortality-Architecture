@@ -5,6 +5,7 @@ Research output only. Requires informed consent or it refuses.
 
 from cia1.entrainment.brainprint import BrainprintSession
 from cia1.entrainment.protocols import PROTOCOLS_LIST
+from cia1.entrainment.resonance import ResonanceLock
 
 
 def main() -> None:
@@ -24,6 +25,11 @@ def main() -> None:
         )
         print(f"           {axes}")
         print(f"           {driven['anchor']}")
+        lock = ResonanceLock().read(driven, beat_hz=driven["beat_hz"], consent=True)
+        print(
+            f"           lock {lock['dominant']} -> {lock['target_hz']:.0f} Hz  "
+            f"{lock['environment']}  {lock['label']}  {lock['spoken']}"
+        )
 
 
 if __name__ == "__main__":

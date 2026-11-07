@@ -289,6 +289,7 @@ class BrainprintSession:
             "beat_hz": protocol.beat_hz,
             "audio": protocol.audio,
             "relative": relative,
+            "bands": {band: mean[band] for band in BANDS},
             "vector": vector,
             "dimensions": list(DIMS),
             "sci": sci,

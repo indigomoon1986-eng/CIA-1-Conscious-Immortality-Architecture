@@ -23,6 +23,9 @@ An entrainment protocol names a beat (the difference between two carriers, or an
 4. The montage is placed on the Veritas torus. Coherence ρ, absorb versus focus, and entangled pairs come from `sophia/consciousness.py`. A dense spectrum (`hits > 6`, which the absorb protocol forces), a severed site, or ρ under 0.7 scatters the mind into absorb. Focus keeps a single locus. A pin holds the mode, matching the Veritas console.
 5. The beat is buried in subject-stable noise and pulled back out with coherent integration, an LMS canceller, and a matched filter from `signal_recovery.py`. The peak becomes carrier lock. The recovery will not invent a tone that was not written into the buffer.
 6. Site band-vectors are clustered with the H0 proxy from `cia1/topostat/homology.py`. The session path uses the stability ratio from `ContinuityManifold`.
+7. `cia1/entrainment/resonance.py` reads those absolute band means through the Sophia MR7 assemble / decode / immersive-directive formulas. Resonance lock targets the center of the leading band (delta 2, theta 6, alpha 10, SMR 14, beta 18, gamma 40). Overload above 0.75 is a safety pause: the spoken line asks to reduce load, and a lock parks the beat on 10 Hz. The protocol field does not silently rewrite itself. Consent false returns `blocked` and does not move the previous-band cursor.
+
+The browser chamber renders this same frame: electrode nodes, the continuity trajectory, and a geometric Sophia whose line is the decoder phrase. She is a meta-observer of the model. She is not a scanned person.
 
 ## Consent
 

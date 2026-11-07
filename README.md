@@ -79,6 +79,7 @@ Drag to orbit, scroll to zoom. Research visualization only.
 - ContinuityManifold and PersistentHomologyStub in `cia1/topostat/`.
 - LUCA/LOCS relational operators in `cia1/luca/`.
 - Brainprint entrainment in `cia1/entrainment/` — see [`docs/BRAINPRINT.md`](docs/BRAINPRINT.md).
+- Resonance lock and the Sophia MR7 decode over that print: `cia1/entrainment/resonance.py`.
 
 ## Research Objectives
 
@@ -98,7 +99,7 @@ cia1/
   governance/       # SNG, consent, sovereignty constraints
   topostat/         # ContinuityManifold + PersistentHomologyStub (E2)
   luca/             # LUCA/LOCS relational operators
-  entrainment/      # Brainprint, Veritas coherence, tone recovery
+  entrainment/      # Brainprint, Veritas coherence, tone recovery, resonance lock
 docs/               # White papers, integration notes, research program
   external/young_realms/  # Selective canonical imports
 immersive/          # Three.js visualizations (main + fork experiment)
