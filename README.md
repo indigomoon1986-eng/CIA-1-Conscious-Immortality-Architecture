@@ -63,6 +63,18 @@ Sovereign Governance (SNG · XTAX · Christ Invariant · PBA)
 
 This is a logical architecture, not a diagram of an existing clinical consciousness-transfer system.
 
+## Live chamber
+
+The runnable web chamber lives in [`chamber/`](chamber/): Muse S Athena (or the signal bench), the SENTIUM six-axis map, Sophia in the 3D room, Zeus Guardian (Sword in the Stone), and a local Web5 name locked to that rhythm.
+
+```bash
+cd chamber
+npm install
+npm run dev
+```
+
+Research instrument. Not a clinical device, not a published identity, and not a bank. The static visualizations in `immersive/` remain.
+
 ## Immersive 3D Environment
 
 - Open `immersive/index.html` for the interactive Three.js visualization of the CIA-1 topology with live synthetic continuity vector and trajectory path.

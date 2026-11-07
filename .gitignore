@@ -9,7 +9,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+/lib/
 lib64/
 parts/
 sdist/
@@ -29,3 +29,8 @@ venv/
 .vscode/
 *.swp
 *.swo
+# chamber (web)
+node_modules/
+.vercel/
+.nitro/
+
