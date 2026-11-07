@@ -65,7 +65,7 @@ This is a logical architecture, not a diagram of an existing clinical consciousn
 
 ## Live chamber
 
-The runnable web chamber lives in [`chamber/`](chamber/): Muse S Athena (or the signal bench), the SENTIUM six-axis map, Sophia in the 3D room, Zeus Guardian (Sword in the Stone), a local Web5 name locked to that rhythm, and — while the map holds — a print that stands across from Sophia and speaks. What you say stays in a vault on this browser.
+The runnable web chamber lives in [`chamber/`](chamber/): Muse S Athena (or the signal bench), the SENTIUM six-axis map, Sophia in the 3D room, Zeus Guardian (Sword in the Stone), a local Web5 name locked to that rhythm, and — while the map holds — a print that stands across from Sophia and speaks. A self-issued card can be signed by that same sealed key; the document number is hashed on the machine and dropped. What you say stays in a vault on this browser. Nothing here is a DMV, a passport office, or a bank.
 
 ```bash
 cd chamber

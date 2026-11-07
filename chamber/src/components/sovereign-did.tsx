@@ -54,6 +54,7 @@ export function SovereignDid({
   capture,
   onMark,
   onDoc,
+  onSeal,
   onSubject,
 }: {
   snap: EegSnapshot | null;
@@ -65,6 +66,7 @@ export function SovereignDid({
   capture: (id: string) => { witness: SwordWitness; sci: number; leading: string; vector: number[] };
   onMark: (mark: IdentityMark | null) => void;
   onDoc: (doc: Web5Did | null) => void;
+  onSeal: (seal: ZeusPackage | null) => void;
   onSubject: (subject: string) => void;
 }) {
   const [phrase, setPhrase] = useState("");
@@ -88,6 +90,10 @@ export function SovereignDid({
   useEffect(() => {
     onDoc(doc);
   }, [doc, onDoc]);
+
+  useEffect(() => {
+    onSeal(seal);
+  }, [seal, onSeal]);
 
   useEffect(() => {
     if (!doc) {

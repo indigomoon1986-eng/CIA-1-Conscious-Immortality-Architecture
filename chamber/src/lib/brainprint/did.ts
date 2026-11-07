@@ -296,6 +296,20 @@ export async function unsealKey(doc: Web5Did, seal: string, phrase: string, code
   if (!ok) throw new DidError("key", "The sealed key does not belong to this DID.");
 }
 
+/** Sign a message with the sealed key. The key is not returned. */
+export async function signWithSeal(doc: Web5Did, seal: string, phrase: string, code: RhythmCode, message: string): Promise<string> {
+  const opened = await returnSword(seal, phrase, code);
+  if (opened.opened.t !== "text") throw new DidError("key", "The sword did not return a key.");
+  const pkcs8 = b64ToBytes(opened.opened.body);
+  const privateKey = await crypto.subtle.importKey("pkcs8", pkcs8 as BufferSource, { name: "Ed25519" }, false, ["sign"]);
+  const bytes = new TextEncoder().encode(message);
+  const signed = new Uint8Array(await crypto.subtle.sign({ name: "Ed25519" }, privateKey, bytes as BufferSource));
+  const publicKey = await importPublic(publicKeyBytes(doc.verificationMethod[0].publicKeyMultibase));
+  const ok = await crypto.subtle.verify({ name: "Ed25519" }, publicKey, signed as BufferSource, bytes as BufferSource);
+  if (!ok) throw new DidError("key", "The sealed key does not belong to this DID.");
+  return multibase(signed);
+}
+
 function bytesToB64(bytes: Uint8Array): string {
   let raw = "";
   const chunk = 0x8000;

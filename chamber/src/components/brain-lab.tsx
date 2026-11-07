@@ -3,6 +3,7 @@ import { Download, Headphones, Lock, Play, ShieldCheck, Square, Unlock } from "l
 import { ChamberHost } from "@/components/chamber-host";
 import { ContinuityNode } from "@/components/continuity-node";
 import { EegSync } from "@/components/eeg-sync";
+import { GovId } from "@/components/gov-id";
 import { SovereignDid } from "@/components/sovereign-did";
 import { ZeusVault } from "@/components/zeus-vault";
 import {
@@ -25,7 +26,7 @@ import {
 } from "@/lib/brainprint/resonance";
 import type { EegSnapshot } from "@/lib/brainprint/eeg";
 import type { IdentityMark, Web5Did } from "@/lib/brainprint/did";
-import { witnessFromSnap } from "@/lib/brainprint/zeus";
+import { witnessFromSnap, type ZeusPackage } from "@/lib/brainprint/zeus";
 
 const DIM_LABEL: Record<DimId, string> = {
   causal: "Causal",
@@ -175,6 +176,7 @@ export function BrainLab() {
   const [greet, setGreet] = useState<string | null>(null);
   const [mark, setMark] = useState<IdentityMark | null>(null);
   const [printDoc, setPrintDoc] = useState<Web5Did | null>(null);
+  const [printSeal, setPrintSeal] = useState<ZeusPackage | null>(null);
   const [memories, setMemories] = useState(0);
 
   const paramsRef = useRef({ subject, protocolId, beat, pin, lockOn });
@@ -464,7 +466,8 @@ export function BrainLab() {
                 meta-observer of that map. A Muse headset, or the signal bench, drives that map from a live
                 montage. The same rhythm can draw the sword: Zeus Guardian seals a package to it. Forge a
                 Web5 name and Sophia holds it only while this brainmap still matches. While it holds, the
-                print stands in the room and can speak. What you say stays on this node.
+                print stands in the room and can speak, and a self-issued card can be signed by the same
+                sword. What you say stays on this node. The document number is hashed here and dropped.
               </p>
             </div>
             <p className="text-sm text-muted">
@@ -565,8 +568,11 @@ export function BrainLab() {
         capture={captureMap}
         onMark={setMark}
         onDoc={setPrintDoc}
+        onSeal={setPrintSeal}
         onSubject={setSubject}
       />
+
+      <GovId doc={printDoc} seal={printSeal} snap={eeg} consent={consent} held={Boolean(mark?.held)} />
 
       <ContinuityNode doc={printDoc} held={Boolean(mark?.held)} consent={consent} onMemories={setMemories} />
 
