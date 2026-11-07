@@ -12,6 +12,7 @@ export type ChamberProps = {
   lockOn: boolean;
   reduceMotion: boolean;
   mark?: IdentityMark | null;
+  memories?: number;
   onGreet: () => void;
 };
 
@@ -232,6 +233,46 @@ export function ImmersiveChamber(props: ChamberProps) {
     identityRing.position.y = 0.04;
     identity.add(identityRing);
     scene.add(identity);
+
+    const clone = new THREE.Group();
+    clone.position.set(-1.22, 0, -0.28);
+    clone.visible = false;
+    const cloneRobe = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.34, 0.92, 20), parchment);
+    cloneRobe.position.y = 0.56;
+    const cloneChest = new THREE.Mesh(new THREE.SphereGeometry(0.2, 18, 14), parchment);
+    cloneChest.position.y = 1.12;
+    const cloneHead = new THREE.Mesh(new THREE.SphereGeometry(0.15, 18, 14), parchment);
+    cloneHead.position.y = 1.48;
+    const cloneEyeMat = new THREE.MeshBasicMaterial({ color: TEAL });
+    const cloneEyeL = new THREE.Mesh(new THREE.SphereGeometry(0.02, 8, 6), cloneEyeMat);
+    const cloneEyeR = new THREE.Mesh(new THREE.SphereGeometry(0.02, 8, 6), cloneEyeMat);
+    cloneEyeL.position.set(-0.05, 1.5, 0.12);
+    cloneEyeR.position.set(0.05, 1.5, 0.12);
+    const cloneRingMat = new THREE.MeshStandardMaterial({
+      color: TEAL,
+      emissive: TEAL,
+      emissiveIntensity: 0.35,
+      roughness: 0.3,
+      metalness: 0.5,
+    });
+    const cloneRing = new THREE.Mesh(new THREE.TorusGeometry(0.58, 0.012, 8, 40), cloneRingMat);
+    cloneRing.rotation.x = Math.PI / 2;
+    cloneRing.position.y = 0.06;
+    const beads: THREE.Mesh[] = [];
+    for (let i = 0; i < 8; i++) {
+      const mat = new THREE.MeshStandardMaterial({
+        color: BRASS,
+        emissive: BRASS,
+        emissiveIntensity: 0.35,
+        roughness: 0.35,
+        metalness: 0.4,
+      });
+      const bead = new THREE.Mesh(new THREE.SphereGeometry(0.04, 8, 6), mat);
+      bead.visible = false;
+      beads.push(bead);
+    }
+    clone.add(cloneRobe, cloneChest, cloneHead, cloneEyeL, cloneEyeR, cloneRing, ...beads);
+    scene.add(clone);
 
     const siteGeom = new THREE.SphereGeometry(0.07, 16, 12);
     const scratch = new THREE.Vector3();
@@ -529,6 +570,24 @@ export function ImmersiveChamber(props: ChamberProps) {
         }
         const turn = mark.turn * Math.PI * 2;
         identity.rotation.y = live.reduceMotion ? turn : phase * 0.15 + turn;
+        clone.visible = mark.held;
+        if (mark.held) {
+          const yaw = Math.atan2(sophia.position.x - clone.position.x, sophia.position.z - clone.position.z);
+          clone.rotation.y = live.reduceMotion ? yaw : lerpAngle(clone.rotation.y, yaw, 1 - Math.exp(-2.4 * dt));
+          cloneRingMat.color.setHex(color);
+          cloneRingMat.emissive.setHex(color);
+          cloneEyeMat.color.setHex(color);
+          const self = frame.vector[3] ?? 0.4;
+          cloneChest.scale.setScalar(0.82 + self * 0.45);
+          const count = Math.min(8, live.memories ?? 0);
+          for (let i = 0; i < 8; i++) {
+            beads[i].visible = i < count;
+            const angle = (i / 8) * Math.PI * 2 + (live.reduceMotion ? mark.turn : phase * 0.25);
+            beads[i].position.set(Math.cos(angle) * 0.58, 0.1, Math.sin(angle) * 0.58);
+          }
+        }
+      } else {
+        clone.visible = false;
       }
 
       let faceId = frame.locus;

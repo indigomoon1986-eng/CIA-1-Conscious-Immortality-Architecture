@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Download, Headphones, Lock, Play, ShieldCheck, Square, Unlock } from "lucide-react";
 import { ChamberHost } from "@/components/chamber-host";
+import { ContinuityNode } from "@/components/continuity-node";
 import { EegSync } from "@/components/eeg-sync";
 import { SovereignDid } from "@/components/sovereign-did";
 import { ZeusVault } from "@/components/zeus-vault";
@@ -23,7 +24,7 @@ import {
   slewBeat,
 } from "@/lib/brainprint/resonance";
 import type { EegSnapshot } from "@/lib/brainprint/eeg";
-import type { IdentityMark } from "@/lib/brainprint/did";
+import type { IdentityMark, Web5Did } from "@/lib/brainprint/did";
 import { witnessFromSnap } from "@/lib/brainprint/zeus";
 
 const DIM_LABEL: Record<DimId, string> = {
@@ -173,6 +174,8 @@ export function BrainLab() {
   const [eeg, setEeg] = useState<EegSnapshot | null>(null);
   const [greet, setGreet] = useState<string | null>(null);
   const [mark, setMark] = useState<IdentityMark | null>(null);
+  const [printDoc, setPrintDoc] = useState<Web5Did | null>(null);
+  const [memories, setMemories] = useState(0);
 
   const paramsRef = useRef({ subject, protocolId, beat, pin, lockOn });
   paramsRef.current = { subject, protocolId, beat, pin, lockOn };
@@ -460,7 +463,8 @@ export function BrainLab() {
                 Entrain a rhythm and watch it become a cognitive map. Sophia stands in the chamber as a
                 meta-observer of that map. A Muse headset, or the signal bench, drives that map from a live
                 montage. The same rhythm can draw the sword: Zeus Guardian seals a package to it. Forge a
-                Web5 name and Sophia holds it only while this brainmap still matches.
+                Web5 name and Sophia holds it only while this brainmap still matches. While it holds, the
+                print stands in the room and can speak. What you say stays on this node.
               </p>
             </div>
             <p className="text-sm text-muted">
@@ -480,6 +484,7 @@ export function BrainLab() {
             lockOn={lockOn && consent}
             reduceMotion={reduceMotion}
             mark={mark}
+            memories={memories}
             onGreet={greetSophia}
           />
           <div className="pointer-events-none absolute inset-x-0 top-0 flex items-start justify-between gap-3 p-3">
@@ -526,7 +531,7 @@ export function BrainLab() {
           Drag to orbit. Scroll or pinch to zoom. Tap Sophia.
           {mark
             ? mark.held
-              ? ` Sophia is locked to ${mark.did.slice(0, 18)}…${mark.did.slice(-6)}.`
+              ? ` Sophia is locked to ${mark.did.slice(0, 18)}…${mark.did.slice(-6)}. The print stands across from her.`
               : ` Sophia is watching ${mark.did.slice(0, 18)}…${mark.did.slice(-6)}. This brainmap has left the seal.`
             : " The trace under the map is the live montage, not a decoration."}
         </p>
@@ -559,8 +564,11 @@ export function BrainLab() {
         vector={frame.vector}
         capture={captureMap}
         onMark={setMark}
+        onDoc={setPrintDoc}
         onSubject={setSubject}
       />
+
+      <ContinuityNode doc={printDoc} held={Boolean(mark?.held)} consent={consent} onMemories={setMemories} />
 
       <div className="mx-auto grid max-w-6xl gap-4 px-4 py-4 lg:grid-cols-12">
         <section className="flex flex-col gap-4 lg:col-span-4" aria-label="Entrainment">

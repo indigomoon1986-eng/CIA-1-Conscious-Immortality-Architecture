@@ -53,6 +53,7 @@ export function SovereignDid({
   vector,
   capture,
   onMark,
+  onDoc,
   onSubject,
 }: {
   snap: EegSnapshot | null;
@@ -63,6 +64,7 @@ export function SovereignDid({
   vector: number[];
   capture: (id: string) => { witness: SwordWitness; sci: number; leading: string; vector: number[] };
   onMark: (mark: IdentityMark | null) => void;
+  onDoc: (doc: Web5Did | null) => void;
   onSubject: (subject: string) => void;
 }) {
   const [phrase, setPhrase] = useState("");
@@ -82,6 +84,10 @@ export function SovereignDid({
     onSubject(stored.doc.id);
     setStatus("A Web5 document from this browser is loaded. The private key stays inside its sword seal.");
   }, [onSubject]);
+
+  useEffect(() => {
+    onDoc(doc);
+  }, [doc, onDoc]);
 
   useEffect(() => {
     if (!doc) {

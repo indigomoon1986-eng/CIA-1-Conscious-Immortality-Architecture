@@ -65,7 +65,7 @@ This is a logical architecture, not a diagram of an existing clinical consciousn
 
 ## Live chamber
 
-The runnable web chamber lives in [`chamber/`](chamber/): Muse S Athena (or the signal bench), the SENTIUM six-axis map, Sophia in the 3D room, Zeus Guardian (Sword in the Stone), and a local Web5 name locked to that rhythm.
+The runnable web chamber lives in [`chamber/`](chamber/): Muse S Athena (or the signal bench), the SENTIUM six-axis map, Sophia in the 3D room, Zeus Guardian (Sword in the Stone), a local Web5 name locked to that rhythm, and — while the map holds — a print that stands across from Sophia and speaks. What you say stays in a vault on this browser.
 
 ```bash
 cd chamber
