@@ -14,9 +14,11 @@ __author__ = "Steven Craig Leake Jr."
 from .sentium.core import SENTIUMState
 from .continuity.tensor import ContinuityTensor
 from .continuity.sci import SubjectiveContinuityIndex
+from .entrainment.brainprint import BrainprintSession
 
 __all__ = [
     "SENTIUMState",
     "ContinuityTensor",
     "SubjectiveContinuityIndex",
+    "BrainprintSession",
 ]
